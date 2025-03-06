@@ -29,7 +29,7 @@ type HetznerRobotProviderModel struct {
 }
 
 func (p *HetznerRobotProvider) Metadata(ctx context.Context, req provider.MetadataRequest, resp *provider.MetadataResponse) {
-	resp.TypeName = "hetznerrobot"
+	resp.TypeName = "hetzner_robot"
 	resp.Version = p.version
 }
 
@@ -69,8 +69,9 @@ func (p *HetznerRobotProvider) Configure(ctx context.Context, req provider.Confi
 }
 
 func (p *HetznerRobotProvider) Resources(ctx context.Context) []func() resource.Resource {
-	// We don't have any resources yet
-	return nil
+	return []func() resource.Resource{
+		NewServerResource,
+	}
 }
 
 func (p *HetznerRobotProvider) DataSources(ctx context.Context) []func() datasource.DataSource {
